@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="description" content="Anouar El Sabah Relizane — Voyage de luxe, Omra, Hajj, Vols, Visa & Hôtels depuis l'Algérie"/>
+  <title>Anouar El Sabah Relizane | أنوار الصباح</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,600&family=Outfit:wght@300;400;500;600;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<body>
+
+<!-- ========== NAVBAR (Horizon white-label – change logo easily) ========== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">
+      <div class="nav-brand-icon"><i class="fas fa-star-and-crescent"></i></div>
+      <div class="nav-brand-text">
+        <strong data-i18n="brand_name">Anouar El Sabah Relizane</strong>
+        <span data-i18n="brand_tag">Premium Travel Agency</span>
+      </div>
+    </a>
+    <div class="nav-links-wrap">
+      <ul class="nav-links">
+        <li><a href="#hero" data-i18n="nav_home">Home</a></li>
+        <li><a href="#services" data-i18n="nav_services">Services</a></li>
+        <li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li>
+        <li><a href="#offers" data-i18n="nav_offers">Offers</a></li>
+        <li><a href="#watch" data-i18n="nav_watch">Watch</a></li>
+        <li><a href="#why" data-i18n="nav_why">Why Us</a></li>
+        <li><a href="#footer" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="lang-switch"><button class="lang-btn" data-lang="ar">AR</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn active" data-lang="en">EN</button></div>
+      <button class="btn-admin" onclick="openAdmin()"><i class="fas fa-shield-halved"></i> <span data-i18n="nav_admin">Admin</span></button>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" data-i18n="nav_home">Home</a><a href="#services" data-i18n="nav_services">Services</a><a href="#gallery" data-i18n="nav_gallery">Gallery</a><a href="#offers" data-i18n="nav_offers">Offers</a><a href="#watch" data-i18n="nav_watch">Watch</a><a href="#why" data-i18n="nav_why">Why Us</a><a href="#footer" data-i18n="nav_contact">Contact</a>
+  <div class="lang-switch" style="margin-top:.8rem;"><button class="lang-btn" data-lang="ar">AR</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn active" data-lang="en">EN</button></div>
+</div>
+
+<!-- ========== HERO SECTION ========== -->
+<section id="hero">
+  <div class="hero-shape-1"></div><div class="hero-shape-2"></div><div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow"><i class="fas fa-map-pin"></i> <span data-i18n="hero_eyebrow">Algeria's #1 Premium Travel Agency</span></div>
+      <h1 class="hero-h1"><span class="line-gold" data-i18n="hero_h1_1">Journey Beyond</span><br><span data-i18n="hero_h1_2">the Horizon</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">Omra, Hajj, flights, visas and luxury hotels — handled with care from Algeria to the world.</p>
+      <div class="hero-btns"><a href="#booking" class="btn btn-gold btn-lg"><i class="fas fa-plane"></i> <span data-i18n="btn_book">Book Now</span></a><a href="#watch" class="btn btn-ghost btn-lg"><i class="fas fa-play-circle"></i> <span data-i18n="btn_watch">Watch Stories</span></a></div>
+      <div class="hero-stats"><div class="hero-stat"><span class="num">2000+</span><span class="lbl" data-i18n="stat_pilgrims">Happy Pilgrims</span></div><div class="hero-stat"><span class="num">12+</span><span class="lbl" data-i18n="stat_years">Years Experience</span></div><div class="hero-stat"><span class="num">100%</span><span class="lbl" data-i18n="stat_trust">Trusted Service</span></div></div>
+    </div>
+    <div class="hero-right">
+      <div class="video-showcase">
+        <div class="video-showcase-label"><i class="fas fa-video"></i> <span data-i18n="hero_video_label">Client Stories</span></div>
+        <div id="heroVideoPoster" class="video-poster-wrap" onclick="playHeroVideo()">
+          <img id="heroPosterImg" src="https://images.pexels.com/photos/258879/pexels-photo-258879.jpeg?auto=compress&cs=tinysrgb&w=267&h=476&fit=crop" alt="Travel story" loading="lazy"/>
+          <div class="video-play-btn"><span>▶</span></div>
+        </div>
+        <div class="video-live-badge"><i class="fab fa-facebook"></i> <span data-i18n="hero_video_badge">Live on Facebook</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== STATS STRIP ========== -->
+<div class="stats-strip"><div class="stats-strip-inner"><div class="stat-cell reveal"><span class="stat-big">2000+</span><span class="stat-small" data-i18n="strip_pilgrims">Pilgrims served</span></div><div class="stat-cell reveal delay-1"><span class="stat-big">98%</span><span class="stat-small" data-i18n="strip_satisfaction">Satisfaction rate</span></div><div class="stat-cell reveal delay-2"><span class="stat-big">50+</span><span class="stat-small" data-i18n="strip_destinations">Destinations</span></div><div class="stat-cell reveal delay-3"><span class="stat-big">12</span><span class="stat-small" data-i18n="strip_years">Years of trust</span></div></div></div>
+
+<!-- ========== SERVICES ========== -->
+<section id="services"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="svc_tag">What We Offer</p><h2 class="sec-title"><span class="g" data-i18n="svc_t1">Our</span> <span data-i18n="svc_t2">Services</span></h2><div class="sec-line"></div><p class="sec-sub" data-i18n="svc_sub">Everything you need for a perfect journey, from A to Z.</p></div><div class="services-grid"><div class="svc-card active reveal" onclick="switchSvc(this);selectService('umrah')"><div class="svc-icon"><i class="fas fa-kaaba"></i></div><div class="svc-name" data-i18n="svc_umrah">Omra</div><div class="svc-desc" data-i18n="svc_umrah_desc">Full packages including visa, flight & hotel</div></div><div class="svc-card reveal delay-1" onclick="switchSvc(this);selectService('flights')"><div class="svc-icon"><i class="fas fa-plane-departure"></i></div><div class="svc-name" data-i18n="svc_flights">Flights</div><div class="svc-desc" data-i18n="svc_flights_desc">Best fares from Algerian airports worldwide</div></div><div class="svc-card reveal delay-2" onclick="switchSvc(this);selectService('visa')"><div class="svc-icon"><i class="fas fa-passport"></i></div><div class="svc-name" data-i18n="svc_visa">Visa</div><div class="svc-desc" data-i18n="svc_visa_desc">Fast processing for all destinations</div></div><div class="svc-card reveal delay-3" onclick="switchSvc(this);selectService('hotels')"><div class="svc-icon"><i class="fas fa-hotel"></i></div><div class="svc-name" data-i18n="svc_hotels">Hotels</div><div class="svc-desc" data-i18n="svc_hotels_desc">Curated stays from 3★ to luxury 5★</div></div><div class="svc-card reveal delay-4" onclick="switchSvc(this);selectService('packages')"><div class="svc-icon"><i class="fas fa-suitcase-rolling"></i></div><div class="svc-name" data-i18n="svc_packages">Packages</div><div class="svc-desc" data-i18n="svc_packages_desc">All-inclusive travel experiences</div></div></div></div></section>
+
+<!-- ========== GALLERY ========== -->
+<section id="gallery"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="gal_tag">Memories</p><h2 class="sec-title"><span class="g" data-i18n="gal_t1">Our</span> <span class="s" data-i18n="gal_t2">Gallery</span></h2><div class="sec-line"></div><p class="sec-sub" data-i18n="gal_sub">Real moments from our pilgrims' journeys.</p></div></div><div class="gallery-grid container" id="galleryGrid"></div><div class="gallery-strip container" id="galleryStrip"></div></section>
+
+<!-- ========== OFFERS ========== -->
+<section id="offers"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="off_tag">Special Deals</p><h2 class="sec-title"><span class="g" data-i18n="off_t1">Exclusive</span> <span data-i18n="off_t2">Offers</span></h2><div class="sec-line"></div><p class="sec-sub" data-i18n="off_sub">Limited time packages and discounts.</p></div><div class="offers-grid" id="offersGrid"></div></div></section>
+
+<!-- ========== BOOKING FORM ========== -->
+<section id="booking"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="bk_tag">Reserve Now</p><h2 class="sec-title"><span class="g" data-i18n="bk_t1">Book</span> <span data-i18n="bk_t2">Your Trip</span></h2><div class="sec-line"></div></div><div class="booking-wrapper reveal"><div class="booking-header"><div style="display:flex;align-items:center;gap:.8rem;"><div class="booking-icon" id="bookingIcon">🕋</div><div><div class="booking-title" data-i18n="bk_form_title">Request a Booking</div><div class="booking-subtitle" data-i18n="bk_form_sub">We'll contact you within 2 hours</div></div></div><div style="display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--text-2);"><i class="fas fa-lock" style="color:var(--gold);"></i><span data-i18n="bk_secure">Secure & Confidential</span></div></div><div class="booking-body"><form id="bookingForm" onsubmit="submitForm(event)"><div class="form-grid"><div class="f-group"><label class="f-label"><i class="fas fa-user"></i><span data-i18n="bk_name">Full Name</span></label><input class="f-ctrl" id="t-name" type="text" data-i18n-ph="bk_name_ph" placeholder="Ahmed Benali" autocomplete="name"/></div><div class="f-group"><label class="f-label"><i class="fas fa-phone"></i><span data-i18n="bk_phone">Phone Number</span></label><input class="f-ctrl" id="t-phone" type="tel" data-i18n-ph="bk_phone_ph" placeholder="0555 123 456" autocomplete="tel"/></div><div class="f-group"><label class="f-label"><i class="fas fa-concierge-bell"></i><span data-i18n="bk_service">Service</span></label><select class="f-ctrl" id="t-service" onchange="updateBookingHeader()"><option value="" data-i18n="bk_svc_pick">Select service...</option><option value="umrah" data-i18n="svc_umrah">Omra</option><option value="hajj">Hajj</option><option value="flights" data-i18n="svc_flights">Flights</option><option value="visa" data-i18n="svc_visa">Visa</option><option value="hotels" data-i18n="svc_hotels">Hotels</option><option value="packages" data-i18n="svc_packages">Packages</option></select></div><div class="f-group"><label class="f-label"><i class="fas fa-calendar"></i><span data-i18n="bk_date">Departure Date</span></label><input class="f-ctrl" id="t-detail1" type="date"/></div><div class="f-group"><label class="f-label"><i class="fas fa-map-marker-alt"></i><span data-i18n="bk_dest">Destination</span></label><input class="f-ctrl" id="t-detail2" type="text" data-i18n-ph="bk_dest_ph" placeholder="Mecca / Istanbul..."/></div><div class="f-group"><label class="f-label"><i class="fas fa-users"></i><span data-i18n="bk_travelers">Travelers</span></label><input class="f-ctrl" id="t-detail3" type="number" min="1" max="50" placeholder="1"/></div><div class="f-group full"><label class="f-label"><i class="fas fa-comment"></i><span data-i18n="bk_notes">Notes (optional)</span></label><textarea class="f-ctrl" id="t-notes" rows="3" data-i18n-ph="bk_notes_ph" placeholder="Any special requirements..."></textarea></div></div><div class="form-submit-row"><button type="submit" class="btn btn-gold btn-lg"><span class="spinner" id="formSpinner"></span><i class="fas fa-paper-plane"></i> <span data-i18n="bk_submit">Send Request</span></button><button type="button" class="btn btn-wa btn-lg" onclick="sendWA()"><i class="fab fa-whatsapp"></i> <span data-i18n="bk_wa">WhatsApp Us</span></button></div></form></div></div></div></section>
+
+<!-- ========== WATCH ========== -->
+<section id="watch"><div class="watch-inner container"><div class="watch-left reveal"><p class="sec-tag" data-i18n="watch_tag">Real Stories</p><h2 class="sec-title" data-i18n="watch_title">Hear From Our Pilgrims</h2><div class="sec-line"></div><p class="sec-sub" data-i18n="watch_sub">Thousands of Algerians have trusted us with their most sacred journey. Here are their stories.</p><div class="watch-features"><div class="watch-feat"><i class="fas fa-check-circle"></i><span data-i18n="watch_f1">Verified pilgrim testimonials</span></div><div class="watch-feat"><i class="fas fa-star"></i><span data-i18n="watch_f2">5-star rated service, every time</span></div><div class="watch-feat"><i class="fas fa-heart"></i><span data-i18n="watch_f3">We treat every pilgrim like family</span></div><div class="watch-feat"><i class="fas fa-shield-alt"></i><span data-i18n="watch_f4">Full support before, during & after travel</span></div></div></div><div class="watch-right reveal delay-2"><div class="watch-video-card"><div class="watch-video-inner" id="watchVideoWrap"><div class="video-poster-wrap" style="height:476px;" onclick="playWatchVideo()"><img id="watchPosterImg" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=267&h=476&fit=crop" alt="Pilgrim testimonial" style="width:267px;height:476px;object-fit:cover;" loading="lazy"/><div class="video-play-btn"><span>▶</span></div></div></div><div class="watch-social"><i class="fab fa-facebook"></i> <span data-i18n="watch_fb">Watch more on Facebook</span></div></div></div></div></section>
+
+<!-- ========== WHY US ========== -->
+<section id="why"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="why_tag">Our Promise</p><h2 class="sec-title"><span class="g" data-i18n="why_t1">Why Choose</span> <span class="s" data-i18n="why_t2">Us</span></h2><div class="sec-line"></div><p class="sec-sub" data-i18n="why_sub">12 years of trust built one traveler at a time.</p></div><div class="why-grid"><div class="why-card reveal"><div class="why-icon"><i class="fas fa-handshake"></i></div><div class="why-title" data-i18n="why1_t">Trusted Since 2012</div><div class="why-desc" data-i18n="why1_d">Over a decade of serving Algerian travelers with integrity and care.</div></div><div class="why-card reveal delay-1"><div class="why-icon"><i class="fas fa-headset"></i></div><div class="why-title" data-i18n="why2_t">24/7 Support</div><div class="why-desc" data-i18n="why2_d">We're with you from the moment you book until you return home safely.</div></div><div class="why-card reveal delay-2"><div class="why-icon"><i class="fas fa-tag"></i></div><div class="why-title" data-i18n="why3_t">Best Prices</div><div class="why-desc" data-i18n="why3_d">Competitive pricing without compromising on quality or comfort.</div></div><div class="why-card reveal delay-3"><div class="why-icon"><i class="fas fa-certificate"></i></div><div class="why-title" data-i18n="why4_t">Officially Licensed</div><div class="why-desc" data-i18n="why4_d">Fully licensed by the Algerian Ministry of Tourism. 100% legal.</div></div></div></div></section>
+
+<!-- ========== FOOTER ========== -->
+<footer id="footer"><div class="footer-grid"><div><div class="footer-name">Anouar El Sabah Relizane</div><div class="footer-desc" data-i18n="footer_desc">Your trusted partner for Omra, Hajj, flights, visas, and hotels from Algeria.</div><div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+213776775973">+213 776 775 973</a></div><div class="footer-contact-item"><i class="fab fa-whatsapp"></i><a href="https://wa.me/213776775973" target="_blank">WhatsApp Us</a></div><div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span data-i18n="footer_address">Relizane, Algeria</span></div></div><div class="footer-col"><h4 data-i18n="footer_services">Services</h4><ul><li><a href="#services" data-i18n="svc_umrah">Omra</a></li><li><a href="#services">Hajj</a></li><li><a href="#services" data-i18n="svc_flights">Flights</a></li><li><a href="#services" data-i18n="svc_visa">Visa</a></li><li><a href="#services" data-i18n="svc_hotels">Hotels</a></li></ul></div><div class="footer-col"><h4 data-i18n="footer_quick">Quick Links</h4><ul><li><a href="#gallery" data-i18n="nav_gallery">Gallery</a></li><li><a href="#offers" data-i18n="nav_offers">Offers</a></li><li><a href="#watch" data-i18n="nav_watch">Watch</a></li><li><a href="#why" data-i18n="nav_why">Why Us</a></li></ul></div><div class="footer-col"><h4 data-i18n="footer_follow">Follow Us</h4><ul><li><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li><li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li><li><a href="https://wa.me/213776775973" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li></ul></div></div><div class="footer-bottom">© 2025 Anouar El Sabah Relizane. <span data-i18n="footer_rights">All rights reserved.</span></div></footer>
+
+<a href="https://wa.me/213776775973" class="wa-float" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+<div class="toast" id="toast"></div>
+
+<!-- ========== ADMIN PANEL ========== -->
+<div id="adminPanel">
+  <div class="adm-topbar">
+    <div class="adm-topbar-left"><div class="adm-logo"><div class="adm-logo-icon"><i class="fas fa-star-and-crescent"></i></div>Anouar El Sabah Relizane</div><div class="adm-sep"></div><div class="adm-breadcrumb">Dashboard / <span id="adminBreadcrumb">Overview</span></div></div>
+    <div class="adm-topbar-right"><button class="adm-top-btn" onclick="exportExcel()"><i class="fas fa-file-excel"></i> Excel</button><button class="adm-top-btn" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> PDF</button><button class="adm-top-btn sky" onclick="exportCSV()"><i class="fas fa-file-csv"></i> CSV</button><button class="adm-top-btn danger" onclick="closeAdmin()"><i class="fas fa-times"></i> Close</button></div>
+  </div>
+  <div class="adm-layout">
+    <div class="adm-sidebar">
+      <div class="adm-nav-section">Main</div>
+      <div class="adm-nav-item active" data-section="dashboard" onclick="loadSection('dashboard')"><i class="fas fa-chart-pie"></i> Dashboard</div>
+      <div class="adm-nav-item" data-section="bookings" onclick="loadSection('bookings')"><i class="fas fa-list-alt"></i> Bookings</div>
+      <div class="adm-nav-item" data-section="clients" onclick="loadSection('clients')"><i class="fas fa-users"></i> Clients</div>
+      <div class="adm-nav-item" data-section="journal" onclick="loadSection('journal')"><i class="fas fa-book"></i> Journal (G50)</div>
+      <div class="adm-nav-section">Content</div>
+      <div class="adm-nav-item" data-section="offers" onclick="loadSection('offers')"><i class="fas fa-tags"></i> Offers</div>
+      <div class="adm-nav-item" data-section="gallery" onclick="loadSection('gallery')"><i class="fas fa-images"></i> Gallery</div>
+      <div class="adm-nav-item" data-section="videos" onclick="loadSection('videos')"><i class="fas fa-video"></i> Videos</div>
+      <div class="adm-nav-section">System</div>
+      <div class="adm-nav-item" data-section="settings" onclick="loadSection('settings')"><i class="fas fa-cog"></i> Settings</div>
+    </div>
+    <div class="adm-main" id="adminContent"><div style="color:rgba(255,255,255,.3);text-align:center;padding:4rem;">Loading...</div></div>
+  </div>
+</div>
+
+<!-- ========== ADMIN LOGIN ========== -->
+<div class="admin-login-wrap" id="adminLoginWrap">
+  <div class="login-card"><div class="login-card-icon">🔐</div><h2>Admin Panel</h2><p>Enter your password and the 2FA code (if required)</p><div class="f-group" style="text-align:left;"><input class="f-ctrl adm-input" id="adminPw" type="password" placeholder="Password..." onkeydown="if(event.key==='Enter')doAdminLogin()"/></div><div id="twoFactorSection" style="display:none;"><div class="f-group" style="text-align:left;"><input class="f-ctrl adm-input" id="twoFactorCode" type="text" placeholder="6-digit code" onkeydown="if(event.key==='Enter')verify2FA()"/></div><div id="codeDisplay" style="background:#1C2A3A;border-radius:8px;padding:.5rem;margin-top:.5rem;font-size:.8rem;color:var(--gold-l);text-align:center;"></div></div><div class="login-err" id="loginErr" style="display:none;">❌ Incorrect password or code</div><button class="btn btn-gold" style="width:100%;margin-top:1rem;" onclick="doAdminLogin()">Access Dashboard</button><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:.5rem;" onclick="document.getElementById('adminLoginWrap').classList.remove('show')">Cancel</button><div class="login-hint">Default password: <code>anouar2026</code> (2FA disabled in local mode)</div></div>
+</div>
+
+<!-- ========== MODALS ========== -->
+<div class="adm-modal-overlay" id="contentModal"><div class="adm-modal"><h3 id="modalTitle">Add Item</h3><div id="modalBody"></div><div class="adm-modal-btns"><button class="adm-btn danger" onclick="closeModal()">Cancel</button><button class="adm-btn success" onclick="saveModal()"><i class="fas fa-save"></i> Save</button></div></div></div>
+<div class="adm-modal-overlay" id="receiptModal"><div class="adm-modal" style="max-width:600px;"><h3>Bon de reçu</h3><div id="receiptContent"></div><div class="adm-modal-btns"><button class="adm-btn" onclick="printReceipt()"><i class="fas fa-print"></i> Print</button><button class="adm-btn" onclick="closeReceiptModal()">Close</button></div></div></div>
+
+<!-- ========== NOTIFICATION BELL & GLOBAL SEARCH ========== -->
+<div id="notificationBell" style="position:fixed;bottom:90px;right:20px;width:50px;height:50px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;cursor:pointer;z-index:1000;box-shadow:0 4px 10px rgba(0,0,0,.2);" onclick="toggleNotificationPanel()"><i class="fas fa-bell"></i><span id="notificationBadge" style="position:absolute;top:-5px;right:-5px;background:red;color:white;border-radius:50%;padding:2px 6px;font-size:10px;display:none;">0</span></div>
+<div id="notificationPanel" style="position:fixed;bottom:150px;right:20px;width:280px;background:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:1001;display:none;flex-direction:column;max-height:400px;overflow-y:auto;border:1px solid var(--gold);"><div style="padding:10px;background:var(--gold);color:white;border-radius:12px 12px 0 0;font-weight:bold;">Notifications</div><div id="notificationList" style="padding:10px;"></div></div>
+<div style="position:fixed;bottom:90px;left:20px;z-index:1000;background:white;border-radius:30px;box-shadow:0 2px 10px rgba(0,0,0,.2);display:flex;align-items:center;padding:5px 15px;"><i class="fas fa-search" style="color:var(--gold);margin-right:8px;"></i><input type="text" id="globalSearchInput" placeholder="🔍 Search clients, bookings, payments..." style="border:none;outline:none;padding:8px;width:200px;font-size:0.8rem;"></div>
+<div id="globalSearchResults" style="position:fixed;bottom:140px;left:20px;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.2);width:260px;max-height:300px;overflow-y:auto;display:none;z-index:1002;"></div>
+
+  <!-- All the original HTML body content goes here (navbar, hero, sections, footer, modals) -->
+  <!-- Keep everything exactly as in the original, but remove the giant 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Horizon API client -->
+  <script src="js/horizon-api.js"></script>
+
+  <!-- Application modules -->
+  <script src="js/i18n.js"></script>
+  <script src="js/public.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- External dependencies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Horizon API client -->
+  <script src="js/horizon-api.js"></script>
+
+  <!-- Application modules -->
+  <script src="js/i18n.js"></script>
+  <script src="js/public.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/fixes.js"></script>
+</body>
+</html>
