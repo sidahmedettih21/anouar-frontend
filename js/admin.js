@@ -1,17 +1,41 @@
 (function() {
   'use strict';
 
+  // ========== LANGUAGE FALLBACK & GLOBAL setLang ==========
+  if (!window.TR) {
+    console.warn('TR not loaded, using fallback');
+    window.TR = { en: {}, fr: {}, ar: {} };
+  }
+
+  if (!window.setLang) {
+    window.setLang = function(l) {
+      window.lang = l;
+      localStorage.setItem('aes_lang', l);
+      document.documentElement.lang = l;
+      document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+      document.body.classList.toggle('ar', l === 'ar');
+      // Refresh public content
+      if (typeof renderOffers === 'function') renderOffers();
+      if (typeof renderGallery === 'function') renderGallery();
+      // Refresh admin panel if open
+      if (adminOk && typeof loadSection === 'function' && adminSection) {
+        loadSection(adminSection);
+      }
+    };
+  }
+
+  // ========== ADMIN STATE ==========
   let adminOk = false;
   let adminSection = 'dashboard';
   let modalMode = null;
   let modalEditId = null;
-  let pending2FACode = null;
-  let pending2FACallback = null;
 
+  // ========== HELPERS ==========
   function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
   function san(s) { if (typeof s !== 'string') return ''; return s.replace(/<[^>]*>/g,'').trim().slice(0,500); }
   function showToast(msg, type) { if (window.showToast) window.showToast(msg, type); }
 
+  // ========== AUTH ==========
   async function doAdminLogin() {
     const email = 'admin@anouarelsabah.com';
     const password = document.getElementById('adminPw')?.value;
@@ -42,6 +66,7 @@
 
   function closeAdmin() { document.getElementById('adminPanel')?.classList.remove('show'); }
 
+  // ========== NAVIGATION ==========
   async function loadSection(sec) {
     adminSection = sec;
     document.querySelectorAll('.adm-nav-item').forEach(el => el.classList.toggle('active', el.dataset.section === sec));
@@ -52,6 +77,7 @@
     if (fns[sec]) await fns[sec](c); else if (c) c.innerHTML = '<div class="no-data">Section coming soon</div>';
   }
 
+  // ========== SECTION RENDERERS ==========
   async function renderDashboard(c) { c.innerHTML = '<div class="adm-kpi-grid"><div class="adm-kpi">📋 — Total Bookings</div></div>'; }
   async function renderBookingsSection(c) { c.innerHTML = '<div class="no-data">Bookings coming soon</div>'; }
   async function renderClientsSection(c) { c.innerHTML = '<div class="no-data">Clients coming soon</div>'; }
@@ -87,20 +113,23 @@
 
   function renderSettingsSection(c) { c.innerHTML = '<div class="no-data">Settings coming soon</div>'; }
 
-  function openModal(type, id) { /* ... keep existing ... */ }
+  // ========== MODAL & CRUD (stubs – keep existing implementation) ==========
+  function openModal(type, id) { /* keep your existing code */ }
   function closeModal() { document.getElementById('contentModal')?.classList.remove('show'); }
-  async function saveModal() { /* ... keep existing ... */ }
-  async function toggleActive(type, id) { /* ... keep existing ... */ }
-  async function deleteItem(type, id) { /* ... keep existing ... */ }
+  async function saveModal() { /* keep existing */ }
+  async function toggleActive(type, id) { /* keep existing */ }
+  async function deleteItem(type, id) { /* keep existing */ }
   function exportExcel() { showToast('Excel export (demo)','ok'); }
   function exportPDF() { showToast('PDF export (demo)','ok'); }
   function exportCSV() { showToast('CSV export (demo)','ok'); }
 
+  // ========== AUTO-ATTACH ADMIN LISTENER ==========
   function attachAdminListener() {
     const btn = document.querySelector('.btn-admin, [onclick*="openAdmin"]');
     if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); openAdmin(); });
   }
 
+  // ========== EXPOSE GLOBALS ==========
   window.openAdmin = openAdmin;
   window.closeAdmin = closeAdmin;
   window.doAdminLogin = doAdminLogin;
@@ -114,6 +143,7 @@
   window.exportPDF = exportPDF;
   window.exportCSV = exportCSV;
 
+  // ========== INIT ==========
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attachAdminListener);
   else attachAdminListener();
 })();
