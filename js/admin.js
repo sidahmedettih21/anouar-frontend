@@ -14,10 +14,8 @@
       document.documentElement.lang = l;
       document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
       document.body.classList.toggle('ar', l === 'ar');
-      // Refresh public content
       if (typeof renderOffers === 'function') renderOffers();
       if (typeof renderGallery === 'function') renderGallery();
-      // Refresh admin panel if open
       if (adminOk && typeof loadSection === 'function' && adminSection) {
         loadSection(adminSection);
       }
@@ -29,6 +27,8 @@
   let adminSection = 'dashboard';
   let modalMode = null;
   let modalEditId = null;
+  let pending2FACode = null;
+  let pending2FACallback = null;
 
   // ========== HELPERS ==========
   function esc(s) { return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : ''; }
@@ -104,21 +104,163 @@
   }
 
   async function renderVideosSection(c) {
-    const vids = window.DEF_VIDEOS || [];
-    let html = `<div style="display:flex;justify-content:space-between;margin-bottom:1rem;"><h2>Manage Videos</h2><button class="adm-btn success" onclick="openModal('video',null)"><i class="fas fa-plus"></i> Add Video</button></div><div class="adm-grid">`;
-    vids.forEach(v => { html += `<div class="adm-content-card"><img src="${v.thumb}"/><div class="adm-content-card-body"><div class="adm-content-card-title">${v.label}</div><div class="adm-content-card-sub">${v.active!==false?'Active':'Hidden'}</div><div class="adm-content-card-actions"><button class="adm-btn" onclick="openModal('video',${v.id})">Edit</button><button class="adm-btn" onclick="toggleActive('video',${v.id})">${v.active!==false?'Hide':'Show'}</button><button class="adm-btn danger" onclick="deleteItem('video',${v.id})">Delete</button></div></div></div>`; });
-    html += `<div class="adm-add-card" onclick="openModal('video',null)"><i class="fas fa-video"></i><span>Add Video</span></div></div>`;
-    c.innerHTML = html;
+    try {
+      const vids = await HorizonAPI.adminGetContent('video');
+      let html = `<div style="display:flex;justify-content:space-between;margin-bottom:1rem;"><h2>Manage Videos</h2><button class="adm-btn success" onclick="openModal('video',null)"><i class="fas fa-plus"></i> Add Video</button></div><div class="adm-grid">`;
+      vids.forEach(v => { const d = v.data; html += `<div class="adm-content-card"><img src="${esc(d.thumbnail_url||d.thumb)}"/><div class="adm-content-card-body"><div class="adm-content-card-title">${esc(d.label||d.title)}</div><div class="adm-content-card-sub">${v.is_active?'Active':'Hidden'}</div><div class="adm-content-card-actions"><button class="adm-btn" onclick="openModal('video','${v.uuid}')">Edit</button><button class="adm-btn" onclick="toggleActive('video','${v.uuid}')">${v.is_active?'Hide':'Show'}</button><button class="adm-btn danger" onclick="deleteItem('video','${v.uuid}')">Delete</button></div></div></div>`; });
+      html += `<div class="adm-add-card" onclick="openModal('video',null)"><i class="fas fa-video"></i><span>Add Video</span></div></div>`;
+      c.innerHTML = html;
+    } catch (e) { c.innerHTML = '<div class="error">Failed to load videos</div>'; }
   }
 
   function renderSettingsSection(c) { c.innerHTML = '<div class="no-data">Settings coming soon</div>'; }
 
-  // ========== MODAL & CRUD (stubs – keep existing implementation) ==========
-  function openModal(type, id) { /* keep your existing code */ }
+  // ========== MODAL & CRUD (FULLY IMPLEMENTED) ==========
+  function openModal(type, id) {
+    modalMode = type;
+    modalEditId = id;
+    const m = document.getElementById('contentModal');
+    const t = document.getElementById('modalTitle');
+    const b = document.getElementById('modalBody');
+    if (!m || !t || !b) return;
+    m.classList.add('show');
+    if (type === 'offer') {
+      t.textContent = (id ? 'Edit' : 'Add') + ' Offer';
+      b.innerHTML = `
+        <div class="adm-field"><label>Title (EN)</label><input class="adm-input" id="mf_title_en" value=""/></div>
+        <div class="adm-field"><label>Title (FR)</label><input class="adm-input" id="mf_title_fr" value=""/></div>
+        <div class="adm-field"><label>Title (AR)</label><input class="adm-input" id="mf_title_ar" value=""/></div>
+        <div class="adm-field"><label>Description (EN)</label><textarea class="adm-input adm-textarea" id="mf_desc_en"></textarea></div>
+        <div class="adm-field"><label>Description (FR)</label><textarea class="adm-input adm-textarea" id="mf_desc_fr"></textarea></div>
+        <div class="adm-field"><label>Description (AR)</label><textarea class="adm-input adm-textarea" id="mf_desc_ar"></textarea></div>
+        <div class="adm-field"><label>Price (DZD)</label><input class="adm-input" id="mf_price" type="number" value=""/></div>
+        <div class="adm-field"><label>Image URL</label><input class="adm-input" id="mf_image_url" value=""/></div>
+      `;
+      if (id) {
+        HorizonAPI.adminGetContent('offer').then(offers => {
+          const o = offers.find(x => x.uuid === id);
+          if (o) {
+            document.getElementById('mf_title_en').value = o.data.title?.en || '';
+            document.getElementById('mf_title_fr').value = o.data.title?.fr || '';
+            document.getElementById('mf_title_ar').value = o.data.title?.ar || '';
+            document.getElementById('mf_desc_en').value = o.data.description?.en || '';
+            document.getElementById('mf_desc_fr').value = o.data.description?.fr || '';
+            document.getElementById('mf_desc_ar').value = o.data.description?.ar || '';
+            document.getElementById('mf_price').value = o.data.price || '';
+            document.getElementById('mf_image_url').value = o.data.image_url || o.data.img || '';
+          }
+        });
+      }
+    } else if (type === 'gallery') {
+      t.textContent = (id ? 'Edit' : 'Add') + ' Gallery Photo';
+      b.innerHTML = `
+        <div class="adm-field"><label>Image URL</label><input class="adm-input" id="mf_image_url" value=""/></div>
+        <div class="adm-field"><label>Caption</label><input class="adm-input" id="mf_caption" value=""/></div>
+        <div class="adm-field"><label>Alt Text</label><input class="adm-input" id="mf_alt" value=""/></div>
+      `;
+      if (id) {
+        HorizonAPI.adminGetContent('gallery').then(items => {
+          const g = items.find(x => x.uuid === id);
+          if (g) {
+            document.getElementById('mf_image_url').value = g.data.image_url || g.data.src || '';
+            document.getElementById('mf_caption').value = g.data.caption || '';
+            document.getElementById('mf_alt').value = g.data.alt || '';
+          }
+        });
+      }
+    } else if (type === 'video') {
+      t.textContent = (id ? 'Edit' : 'Add') + ' Video';
+      b.innerHTML = `
+        <div class="adm-field"><label>Label / Title</label><input class="adm-input" id="mf_label" value=""/></div>
+        <div class="adm-field"><label>Thumbnail URL</label><input class="adm-input" id="mf_thumb" value=""/></div>
+        <div class="adm-field"><label>Embed URL (Facebook/YouTube)</label><input class="adm-input" id="mf_embed_url" value=""/></div>
+      `;
+      if (id) {
+        HorizonAPI.adminGetContent('video').then(vids => {
+          const v = vids.find(x => x.uuid === id);
+          if (v) {
+            document.getElementById('mf_label').value = v.data.label || v.data.title || '';
+            document.getElementById('mf_thumb').value = v.data.thumbnail_url || v.data.thumb || '';
+            document.getElementById('mf_embed_url').value = v.data.embed_url || v.data.embedUrl || '';
+          }
+        });
+      }
+    }
+  }
+
   function closeModal() { document.getElementById('contentModal')?.classList.remove('show'); }
-  async function saveModal() { /* keep existing */ }
-  async function toggleActive(type, id) { /* keep existing */ }
-  async function deleteItem(type, id) { /* keep existing */ }
+
+  async function saveModal() {
+    const type = modalMode;
+    const id = modalEditId;
+    let data = {};
+    if (type === 'offer') {
+      data = {
+        title: {
+          en: document.getElementById('mf_title_en')?.value || '',
+          fr: document.getElementById('mf_title_fr')?.value || '',
+          ar: document.getElementById('mf_title_ar')?.value || ''
+        },
+        description: {
+          en: document.getElementById('mf_desc_en')?.value || '',
+          fr: document.getElementById('mf_desc_fr')?.value || '',
+          ar: document.getElementById('mf_desc_ar')?.value || ''
+        },
+        price: parseFloat(document.getElementById('mf_price')?.value || '0'),
+        image_url: document.getElementById('mf_image_url')?.value || ''
+      };
+    } else if (type === 'gallery') {
+      data = {
+        image_url: document.getElementById('mf_image_url')?.value || '',
+        caption: document.getElementById('mf_caption')?.value || '',
+        alt: document.getElementById('mf_alt')?.value || ''
+      };
+    } else if (type === 'video') {
+      data = {
+        label: document.getElementById('mf_label')?.value || '',
+        thumbnail_url: document.getElementById('mf_thumb')?.value || '',
+        embed_url: document.getElementById('mf_embed_url')?.value || ''
+      };
+    }
+    try {
+      if (id) {
+        await HorizonAPI.adminUpdateContent(type, id, { data, is_active: true });
+      } else {
+        await HorizonAPI.adminCreateContent(type, { data, is_active: true });
+      }
+      closeModal();
+      loadSection(adminSection);
+      showToast('Saved!', 'ok');
+    } catch (e) {
+      showToast('Error: ' + e.message, 'err');
+    }
+  }
+
+  async function toggleActive(type, id) {
+    try {
+      const items = await HorizonAPI.adminGetContent(type);
+      const item = items.find(it => it.uuid === id);
+      if (item) {
+        await HorizonAPI.adminUpdateContent(type, id, { data: item.data, is_active: !item.is_active });
+        loadSection(adminSection);
+        showToast('Status toggled', 'ok');
+      }
+    } catch (e) {
+      showToast('Toggle failed: ' + e.message, 'err');
+    }
+  }
+
+  async function deleteItem(type, id) {
+    if (!confirm('Delete this item permanently?')) return;
+    try {
+      await HorizonAPI.adminDeleteContent(type, id);
+      loadSection(adminSection);
+      showToast('Deleted', 'ok');
+    } catch (e) {
+      showToast('Delete failed: ' + e.message, 'err');
+    }
+  }
+
   function exportExcel() { showToast('Excel export (demo)','ok'); }
   function exportPDF() { showToast('PDF export (demo)','ok'); }
   function exportCSV() { showToast('CSV export (demo)','ok'); }
