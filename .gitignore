@@ -3,3 +3,5 @@
 client/public/super-admin/
 *.bak
 client/public/super-admin/
+*.bak
+client/public/super-admin/

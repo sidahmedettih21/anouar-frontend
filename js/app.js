@@ -1,5 +1,6 @@
 (function() {
 (function() {
+(function() {
 'use strict';
 let lang = (() => { try { return JSON.parse(localStorage.getItem('aes_lang')) || 'en'; } catch { return 'en'; } })();
 const LS = {
@@ -29,5 +30,6 @@ window.addEventListener('DOMContentLoaded', init);
 
 window.$ = $; window.esc = esc; window.san = san; window.validPhone = validPhone;
 window.showToast = showToast; window.LS = LS;
+})();
 })();
 })();
