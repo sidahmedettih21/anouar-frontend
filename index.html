@@ -10,12 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,600&family=Outfit:wght@300;400;500;600;700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link rel="stylesheet" href="css/style.css"/>
-  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<body>
 
-<!-- ========== NAVBAR (Horizon white-label – change logo easily) ========== -->
+<!-- ========== NAVBAR ========== -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#hero" class="nav-brand">
@@ -35,15 +33,29 @@
         <li><a href="#why" data-i18n="nav_why">Why Us</a></li>
         <li><a href="#footer" data-i18n="nav_contact">Contact</a></li>
       </ul>
-      <div class="lang-switch"><button class="lang-btn" data-lang="ar">AR</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn active" data-lang="en">EN</button></div>
-      <button class="btn-admin" onclick="openAdmin()"><i class="fas fa-shield-halved"></i> <span data-i18n="nav_admin">Admin</span></button>
+      <div class="lang-switch">
+        <button class="lang-btn" data-lang="ar">AR</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn active" data-lang="en">EN</button>
+      </div>
+      <button class="btn-admin" id="adminBtn"><i class="fas fa-shield-halved"></i> <span data-i18n="nav_admin">Admin</span></button>
     </div>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#hero" data-i18n="nav_home">Home</a><a href="#services" data-i18n="nav_services">Services</a><a href="#gallery" data-i18n="nav_gallery">Gallery</a><a href="#offers" data-i18n="nav_offers">Offers</a><a href="#watch" data-i18n="nav_watch">Watch</a><a href="#why" data-i18n="nav_why">Why Us</a><a href="#footer" data-i18n="nav_contact">Contact</a>
-  <div class="lang-switch" style="margin-top:.8rem;"><button class="lang-btn" data-lang="ar">AR</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn active" data-lang="en">EN</button></div>
+  <a href="#hero" data-i18n="nav_home">Home</a>
+  <a href="#services" data-i18n="nav_services">Services</a>
+  <a href="#gallery" data-i18n="nav_gallery">Gallery</a>
+  <a href="#offers" data-i18n="nav_offers">Offers</a>
+  <a href="#watch" data-i18n="nav_watch">Watch</a>
+  <a href="#why" data-i18n="nav_why">Why Us</a>
+  <a href="#footer" data-i18n="nav_contact">Contact</a>
+  <div class="lang-switch" style="margin-top:.8rem;">
+    <button class="lang-btn" data-lang="ar">AR</button>
+    <button class="lang-btn" data-lang="fr">FR</button>
+    <button class="lang-btn active" data-lang="en">EN</button>
+  </div>
 </div>
 
 <!-- ========== HERO SECTION ========== -->
@@ -83,7 +95,7 @@
 <section id="offers"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="off_tag">Special Deals</p><h2 class="sec-title"><span class="g" data-i18n="off_t1">Exclusive</span> <span data-i18n="off_t2">Offers</span></h2><div class="sec-line"></div><p class="sec-sub" data-i18n="off_sub">Limited time packages and discounts.</p></div><div class="offers-grid" id="offersGrid"></div></div></section>
 
 <!-- ========== BOOKING FORM ========== -->
-<section id="booking"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="bk_tag">Reserve Now</p><h2 class="sec-title"><span class="g" data-i18n="bk_t1">Book</span> <span data-i18n="bk_t2">Your Trip</span></h2><div class="sec-line"></div></div><div class="booking-wrapper reveal"><div class="booking-header"><div style="display:flex;align-items:center;gap:.8rem;"><div class="booking-icon" id="bookingIcon">🕋</div><div><div class="booking-title" data-i18n="bk_form_title">Request a Booking</div><div class="booking-subtitle" data-i18n="bk_form_sub">We'll contact you within 2 hours</div></div></div><div style="display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--text-2);"><i class="fas fa-lock" style="color:var(--gold);"></i><span data-i18n="bk_secure">Secure & Confidential</span></div></div><div class="booking-body"><form id="bookingForm" onsubmit="submitForm(event)"><div class="form-grid"><div class="f-group"><label class="f-label"><i class="fas fa-user"></i><span data-i18n="bk_name">Full Name</span></label><input class="f-ctrl" id="t-name" type="text" data-i18n-ph="bk_name_ph" placeholder="Ahmed Benali" autocomplete="name"/></div><div class="f-group"><label class="f-label"><i class="fas fa-phone"></i><span data-i18n="bk_phone">Phone Number</span></label><input class="f-ctrl" id="t-phone" type="tel" data-i18n-ph="bk_phone_ph" placeholder="0555 123 456" autocomplete="tel"/></div><div class="f-group"><label class="f-label"><i class="fas fa-concierge-bell"></i><span data-i18n="bk_service">Service</span></label><select class="f-ctrl" id="t-service" onchange="updateBookingHeader()"><option value="" data-i18n="bk_svc_pick">Select service...</option><option value="umrah" data-i18n="svc_umrah">Omra</option><option value="hajj">Hajj</option><option value="flights" data-i18n="svc_flights">Flights</option><option value="visa" data-i18n="svc_visa">Visa</option><option value="hotels" data-i18n="svc_hotels">Hotels</option><option value="packages" data-i18n="svc_packages">Packages</option></select></div><div class="f-group"><label class="f-label"><i class="fas fa-calendar"></i><span data-i18n="bk_date">Departure Date</span></label><input class="f-ctrl" id="t-detail1" type="date"/></div><div class="f-group"><label class="f-label"><i class="fas fa-map-marker-alt"></i><span data-i18n="bk_dest">Destination</span></label><input class="f-ctrl" id="t-detail2" type="text" data-i18n-ph="bk_dest_ph" placeholder="Mecca / Istanbul..."/></div><div class="f-group"><label class="f-label"><i class="fas fa-users"></i><span data-i18n="bk_travelers">Travelers</span></label><input class="f-ctrl" id="t-detail3" type="number" min="1" max="50" placeholder="1"/></div><div class="f-group full"><label class="f-label"><i class="fas fa-comment"></i><span data-i18n="bk_notes">Notes (optional)</span></label><textarea class="f-ctrl" id="t-notes" rows="3" data-i18n-ph="bk_notes_ph" placeholder="Any special requirements..."></textarea></div></div><div class="form-submit-row"><button type="submit" class="btn btn-gold btn-lg"><span class="spinner" id="formSpinner"></span><i class="fas fa-paper-plane"></i> <span data-i18n="bk_submit">Send Request</span></button><button type="button" class="btn btn-wa btn-lg" onclick="sendWA()"><i class="fab fa-whatsapp"></i> <span data-i18n="bk_wa">WhatsApp Us</span></button></div></form></div></div></div></section>
+<section id="booking"><div class="container"><div class="sec-header reveal"><p class="sec-tag" data-i18n="bk_tag">Reserve Now</p><h2 class="sec-title"><span class="g" data-i18n="bk_t1">Book</span> <span data-i18n="bk_t2">Your Trip</span></h2><div class="sec-line"></div></div><div class="booking-wrapper reveal"><div class="booking-header"><div style="display:flex;align-items:center;gap:.8rem;"><div class="booking-icon" id="bookingIcon">🕋</div><div><div class="booking-title" data-i18n="bk_form_title">Request a Booking</div><div class="booking-subtitle" data-i18n="bk_form_sub">We'll contact you within 2 hours</div></div></div><div style="display:flex;align-items:center;gap:.6rem;font-size:.78rem;color:var(--text-2);"><i class="fas fa-lock" style="color:var(--gold);"></i><span data-i18n="bk_secure">Secure & Confidential</span></div></div><div class="booking-body"><form id="bookingForm"><div class="form-grid"><div class="f-group"><label class="f-label"><i class="fas fa-user"></i><span data-i18n="bk_name">Full Name</span></label><input class="f-ctrl" id="t-name" type="text" data-i18n-ph="bk_name_ph" placeholder="Ahmed Benali" autocomplete="name"/></div><div class="f-group"><label class="f-label"><i class="fas fa-phone"></i><span data-i18n="bk_phone">Phone Number</span></label><input class="f-ctrl" id="t-phone" type="tel" data-i18n-ph="bk_phone_ph" placeholder="0555 123 456" autocomplete="tel"/></div><div class="f-group"><label class="f-label"><i class="fas fa-concierge-bell"></i><span data-i18n="bk_service">Service</span></label><select class="f-ctrl" id="t-service"><option value="" data-i18n="bk_svc_pick">Select service...</option><option value="umrah" data-i18n="svc_umrah">Omra</option><option value="hajj">Hajj</option><option value="flights" data-i18n="svc_flights">Flights</option><option value="visa" data-i18n="svc_visa">Visa</option><option value="hotels" data-i18n="svc_hotels">Hotels</option><option value="packages" data-i18n="svc_packages">Packages</option></select></div><div class="f-group"><label class="f-label"><i class="fas fa-calendar"></i><span data-i18n="bk_date">Departure Date</span></label><input class="f-ctrl" id="t-detail1" type="date"/></div><div class="f-group"><label class="f-label"><i class="fas fa-map-marker-alt"></i><span data-i18n="bk_dest">Destination</span></label><input class="f-ctrl" id="t-detail2" type="text" data-i18n-ph="bk_dest_ph" placeholder="Mecca / Istanbul..."/></div><div class="f-group"><label class="f-label"><i class="fas fa-users"></i><span data-i18n="bk_travelers">Travelers</span></label><input class="f-ctrl" id="t-detail3" type="number" min="1" max="50" placeholder="1"/></div><div class="f-group full"><label class="f-label"><i class="fas fa-comment"></i><span data-i18n="bk_notes">Notes (optional)</span></label><textarea class="f-ctrl" id="t-notes" rows="3" data-i18n-ph="bk_notes_ph" placeholder="Any special requirements..."></textarea></div></div><div class="form-submit-row"><button type="submit" class="btn btn-gold btn-lg"><span class="spinner" id="formSpinner"></span><i class="fas fa-paper-plane"></i> <span data-i18n="bk_submit">Send Request</span></button><button type="button" class="btn btn-wa btn-lg" onclick="sendWA()"><i class="fab fa-whatsapp"></i> <span data-i18n="bk_wa">WhatsApp Us</span></button></div></form></div></div></div></section>
 
 <!-- ========== WATCH ========== -->
 <section id="watch"><div class="watch-inner container"><div class="watch-left reveal"><p class="sec-tag" data-i18n="watch_tag">Real Stories</p><h2 class="sec-title" data-i18n="watch_title">Hear From Our Pilgrims</h2><div class="sec-line"></div><p class="sec-sub" data-i18n="watch_sub">Thousands of Algerians have trusted us with their most sacred journey. Here are their stories.</p><div class="watch-features"><div class="watch-feat"><i class="fas fa-check-circle"></i><span data-i18n="watch_f1">Verified pilgrim testimonials</span></div><div class="watch-feat"><i class="fas fa-star"></i><span data-i18n="watch_f2">5-star rated service, every time</span></div><div class="watch-feat"><i class="fas fa-heart"></i><span data-i18n="watch_f3">We treat every pilgrim like family</span></div><div class="watch-feat"><i class="fas fa-shield-alt"></i><span data-i18n="watch_f4">Full support before, during & after travel</span></div></div></div><div class="watch-right reveal delay-2"><div class="watch-video-card"><div class="watch-video-inner" id="watchVideoWrap"><div class="video-poster-wrap" style="height:476px;" onclick="playWatchVideo()"><img id="watchPosterImg" src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=267&h=476&fit=crop" alt="Pilgrim testimonial" style="width:267px;height:476px;object-fit:cover;" loading="lazy"/><div class="video-play-btn"><span>▶</span></div></div></div><div class="watch-social"><i class="fab fa-facebook"></i> <span data-i18n="watch_fb">Watch more on Facebook</span></div></div></div></div></section>
@@ -123,45 +135,23 @@
 
 <!-- ========== ADMIN LOGIN ========== -->
 <div class="admin-login-wrap" id="adminLoginWrap">
+  <div class="login-card"><div class="login-card-icon">🔐</div><h2>Admin Panel</h2><p>Enter your credentials</p><div class="f-group"><input class="f-ctrl adm-input" id="adminEmail" type="email" placeholder="Email" value="admin@anouarelsabah.com"/></div><div class="f-group"><input class="f-ctrl adm-input" id="adminPw" type="password" placeholder="Password"/></div><div class="login-err" id="loginErr" style="display:none;">❌ Invalid credentials</div><button class="btn btn-gold" style="width:100%;margin-top:1rem;" onclick="doAdminLogin()">Access Dashboard</button><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:.5rem;" onclick="document.getElementById('adminLoginWrap').classList.remove('show')">Cancel</button></div>
 </div>
 
 <!-- ========== MODALS ========== -->
 <div class="adm-modal-overlay" id="contentModal"><div class="adm-modal"><h3 id="modalTitle">Add Item</h3><div id="modalBody"></div><div class="adm-modal-btns"><button class="adm-btn danger" onclick="closeModal()">Cancel</button><button class="adm-btn success" onclick="saveModal()"><i class="fas fa-save"></i> Save</button></div></div></div>
 <div class="adm-modal-overlay" id="receiptModal"><div class="adm-modal" style="max-width:600px;"><h3>Bon de reçu</h3><div id="receiptContent"></div><div class="adm-modal-btns"><button class="adm-btn" onclick="printReceipt()"><i class="fas fa-print"></i> Print</button><button class="adm-btn" onclick="closeReceiptModal()">Close</button></div></div></div>
 
-<!-- ========== NOTIFICATION BELL & GLOBAL SEARCH ========== -->
-<div id="notificationBell" style="position:fixed;bottom:90px;right:20px;width:50px;height:50px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:1.4rem;cursor:pointer;z-index:1000;box-shadow:0 4px 10px rgba(0,0,0,.2);" onclick="toggleNotificationPanel()"><i class="fas fa-bell"></i><span id="notificationBadge" style="position:absolute;top:-5px;right:-5px;background:red;color:white;border-radius:50%;padding:2px 6px;font-size:10px;display:none;">0</span></div>
-<div id="notificationPanel" style="position:fixed;bottom:150px;right:20px;width:280px;background:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:1001;display:none;flex-direction:column;max-height:400px;overflow-y:auto;border:1px solid var(--gold);"><div style="padding:10px;background:var(--gold);color:white;border-radius:12px 12px 0 0;font-weight:bold;">Notifications</div><div id="notificationList" style="padding:10px;"></div></div>
-<div style="position:fixed;bottom:90px;left:20px;z-index:1000;background:white;border-radius:30px;box-shadow:0 2px 10px rgba(0,0,0,.2);display:flex;align-items:center;padding:5px 15px;"><i class="fas fa-search" style="color:var(--gold);margin-right:8px;"></i><input type="text" id="globalSearchInput" placeholder="🔍 Search clients, bookings, payments..." style="border:none;outline:none;padding:8px;width:200px;font-size:0.8rem;"></div>
-<div id="globalSearchResults" style="position:fixed;bottom:140px;left:20px;background:white;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,.2);width:260px;max-height:300px;overflow-y:auto;display:none;z-index:1002;"></div>
+<!-- External Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
-  <!-- All the original HTML body content goes here (navbar, hero, sections, footer, modals) -->
-  <!-- Keep everything exactly as in the original, but remove the giant 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-
-  <!-- Horizon API client -->
-  <script src="js/horizon-api.js"></script>
-
-  <!-- Application modules -->
-  <script src="js/i18n.js"></script>
-  <script src="js/public.js"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/app.js"></script>
-
-  <!-- External dependencies -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
-
-  <!-- Horizon API client -->
-  <script src="js/horizon-api.js"></script>
-
-  <!-- Application modules -->
-  <script src="js/i18n.js"></script>
-  <script src="js/public.js"></script>
-  <script src="js/admin.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/fixes.js"></script>
+<!-- Horizon API Client & Application Modules -->
+<script src="js/horizon-api.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/public.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
