@@ -123,7 +123,6 @@
 
 <!-- ========== ADMIN LOGIN ========== -->
 <div class="admin-login-wrap" id="adminLoginWrap">
-  <div class="login-card"><div class="login-card-icon">🔐</div><h2>Admin Panel</h2><p>Enter your password and the 2FA code (if required)</p><div class="f-group" style="text-align:left;"><input class="f-ctrl adm-input" id="adminPw" type="password" placeholder="Password..." onkeydown="if(event.key==='Enter')doAdminLogin()"/></div><div id="twoFactorSection" style="display:none;"><div class="f-group" style="text-align:left;"><input class="f-ctrl adm-input" id="twoFactorCode" type="text" placeholder="6-digit code" onkeydown="if(event.key==='Enter')verify2FA()"/></div><div id="codeDisplay" style="background:#1C2A3A;border-radius:8px;padding:.5rem;margin-top:.5rem;font-size:.8rem;color:var(--gold-l);text-align:center;"></div></div><div class="login-err" id="loginErr" style="display:none;">❌ Incorrect password or code</div><button class="btn btn-gold" style="width:100%;margin-top:1rem;" onclick="doAdminLogin()">Access Dashboard</button><button class="btn btn-ghost btn-sm" style="width:100%;margin-top:.5rem;" onclick="document.getElementById('adminLoginWrap').classList.remove('show')">Cancel</button><div class="login-hint">Default password: <code>anouar2026</code> (2FA disabled in local mode)</div></div>
 </div>
 
 <!-- ========== MODALS ========== -->

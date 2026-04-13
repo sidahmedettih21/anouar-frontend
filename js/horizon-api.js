@@ -1,4 +1,5 @@
 (function() {
+(function() {
   'use strict';
 
   const API_BASE = 'http://localhost:3001'; // Change to https://api.horizon.com in prod
@@ -62,4 +63,4 @@
       body: JSON.stringify(data)
     })
   };
-})();
+})();})();

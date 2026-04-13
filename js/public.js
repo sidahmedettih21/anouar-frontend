@@ -1,3 +1,4 @@
+(function() {
 // public.js – Fully functional public site logic (connected to Horizon API)
 'use strict';
 
@@ -202,3 +203,4 @@ window.submitForm = submitForm;
 window.sendWA = sendWA;
 window.setLang = setLang;
 window.observeAll = observeAll;
+})();

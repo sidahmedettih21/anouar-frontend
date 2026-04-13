@@ -1,3 +1,4 @@
+(function() {
 // admin.js – Fully functional admin panel logic (connected to Horizon API)
 'use strict';
 
@@ -166,3 +167,4 @@ window.toggleActive = toggleActive;
 window.deleteItem = deleteItem;
 window.updateBranding = updateBranding;
 window.toggleNotificationPanel = toggleNotificationPanel;
+})();
