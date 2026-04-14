@@ -30,3 +30,19 @@
     console.error('HorizonAPI not loaded – check script order');
   }
 })();
+
+// === ADMIN BUTTON WIRING ===
+document.addEventListener('DOMContentLoaded', () => {
+  const adminBtn = document.getElementById('adminBtn');
+  if (adminBtn) {
+    adminBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (typeof openAdmin === 'function') {
+        openAdmin();
+      } else {
+        console.error('openAdmin not found – check script load order');
+      }
+    });
+    console.log('✅ Admin button wired successfully');
+  }
+});
