@@ -116,78 +116,119 @@
   function renderSettingsSection(c) { c.innerHTML = '<div class="no-data">Settings coming soon</div>'; }
 
   // ========== MODAL & CRUD (FULLY IMPLEMENTED) ==========
-  function openModal(type, id) {
-    modalMode = type;
-    modalEditId = id;
-    const m = document.getElementById('contentModal');
-    const t = document.getElementById('modalTitle');
-    const b = document.getElementById('modalBody');
-    if (!m || !t || !b) return;
-    m.classList.add('show');
-    if (type === 'offer') {
-      t.textContent = (id ? 'Edit' : 'Add') + ' Offer';
-      b.innerHTML = `
-        <div class="adm-field"><label>Title (EN)</label><input class="adm-input" id="mf_title_en" value=""/></div>
-        <div class="adm-field"><label>Title (FR)</label><input class="adm-input" id="mf_title_fr" value=""/></div>
-        <div class="adm-field"><label>Title (AR)</label><input class="adm-input" id="mf_title_ar" value=""/></div>
-        <div class="adm-field"><label>Description (EN)</label><textarea class="adm-input adm-textarea" id="mf_desc_en"></textarea></div>
-        <div class="adm-field"><label>Description (FR)</label><textarea class="adm-input adm-textarea" id="mf_desc_fr"></textarea></div>
-        <div class="adm-field"><label>Description (AR)</label><textarea class="adm-input adm-textarea" id="mf_desc_ar"></textarea></div>
-        <div class="adm-field"><label>Price (DZD)</label><input class="adm-input" id="mf_price" type="number" value=""/></div>
-        <div class="adm-field"><label>Image URL</label><input class="adm-input" id="mf_image_url" value=""/></div>
-      `;
-      if (id) {
-        HorizonAPI.adminGetContent('offer').then(offers => {
-          const o = offers.find(x => x.uuid === id);
-          if (o) {
-            document.getElementById('mf_title_en').value = o.data.title?.en || '';
-            document.getElementById('mf_title_fr').value = o.data.title?.fr || '';
-            document.getElementById('mf_title_ar').value = o.data.title?.ar || '';
-            document.getElementById('mf_desc_en').value = o.data.description?.en || '';
-            document.getElementById('mf_desc_fr').value = o.data.description?.fr || '';
-            document.getElementById('mf_desc_ar').value = o.data.description?.ar || '';
-            document.getElementById('mf_price').value = o.data.price || '';
-            document.getElementById('mf_image_url').value = o.data.image_url || o.data.img || '';
-          }
-        });
-      }
-    } else if (type === 'gallery') {
-      t.textContent = (id ? 'Edit' : 'Add') + ' Gallery Photo';
-      b.innerHTML = `
-        <div class="adm-field"><label>Image URL</label><input class="adm-input" id="mf_image_url" value=""/></div>
-        <div class="adm-field"><label>Caption</label><input class="adm-input" id="mf_caption" value=""/></div>
-        <div class="adm-field"><label>Alt Text</label><input class="adm-input" id="mf_alt" value=""/></div>
-      `;
-      if (id) {
-        HorizonAPI.adminGetContent('gallery').then(items => {
-          const g = items.find(x => x.uuid === id);
-          if (g) {
-            document.getElementById('mf_image_url').value = g.data.image_url || g.data.src || '';
-            document.getElementById('mf_caption').value = g.data.caption || '';
-            document.getElementById('mf_alt').value = g.data.alt || '';
-          }
-        });
-      }
-    } else if (type === 'video') {
-      t.textContent = (id ? 'Edit' : 'Add') + ' Video';
-      b.innerHTML = `
-        <div class="adm-field"><label>Label / Title</label><input class="adm-input" id="mf_label" value=""/></div>
-        <div class="adm-field"><label>Thumbnail URL</label><input class="adm-input" id="mf_thumb" value=""/></div>
-        <div class="adm-field"><label>Embed URL (Facebook/YouTube)</label><input class="adm-input" id="mf_embed_url" value=""/></div>
-      `;
-      if (id) {
-        HorizonAPI.adminGetContent('video').then(vids => {
-          const v = vids.find(x => x.uuid === id);
-          if (v) {
-            document.getElementById('mf_label').value = v.data.label || v.data.title || '';
-            document.getElementById('mf_thumb').value = v.data.thumbnail_url || v.data.thumb || '';
-            document.getElementById('mf_embed_url').value = v.data.embed_url || v.data.embedUrl || '';
-          }
-        });
-      }
+  // In js/admin.js, replace the entire openModal function with:
+
+function openModal(type, id) {
+  modalMode = type;
+  modalEditId = id;
+  const m = document.getElementById('contentModal');
+  const t = document.getElementById('modalTitle');
+  const b = document.getElementById('modalBody');
+  if (!m || !t || !b) return;
+  m.classList.add('show');
+
+  if (type === 'offer') {
+    t.textContent = (id ? 'Edit' : 'Add') + ' Offer';
+    b.innerHTML = `
+      <div class="adm-field"><label>Title (EN)</label><input class="adm-input" id="mf_title_en" value=""/></div>
+      <div class="adm-field"><label>Title (FR)</label><input class="adm-input" id="mf_title_fr" value=""/></div>
+      <div class="adm-field"><label>Title (AR)</label><input class="adm-input" id="mf_title_ar" value=""/></div>
+      <div class="adm-field"><label>Description (EN)</label><textarea class="adm-input adm-textarea" id="mf_desc_en"></textarea></div>
+      <div class="adm-field"><label>Description (FR)</label><textarea class="adm-input adm-textarea" id="mf_desc_fr"></textarea></div>
+      <div class="adm-field"><label>Description (AR)</label><textarea class="adm-input adm-textarea" id="mf_desc_ar"></textarea></div>
+      <div class="adm-field"><label>Price (DZD)</label><input class="adm-input" id="mf_price" type="number" value=""/></div>
+      <div class="adm-field">
+        <label>Offer Image</label>
+        <div id="offerImageUploader"></div>
+        <input type="hidden" id="mf_image_url" value=""/>
+      </div>
+    `;
+    // Initialise file uploader
+    if (typeof createFileUploader === 'function') {
+      const container = document.getElementById('offerImageUploader');
+      const uploader = createFileUploader({
+        onUpload: (url) => { document.getElementById('mf_image_url').value = url; },
+        previewId: 'offerImagePreview'
+      });
+      container.appendChild(uploader.container);
+    }
+
+    if (id) {
+      HorizonAPI.adminGetContent('offer').then(offers => {
+        const o = offers.find(x => x.uuid === id);
+        if (o) {
+          document.getElementById('mf_title_en').value = o.data.title?.en || '';
+          document.getElementById('mf_title_fr').value = o.data.title?.fr || '';
+          document.getElementById('mf_title_ar').value = o.data.title?.ar || '';
+          document.getElementById('mf_desc_en').value = o.data.description?.en || '';
+          document.getElementById('mf_desc_fr').value = o.data.description?.fr || '';
+          document.getElementById('mf_desc_ar').value = o.data.description?.ar || '';
+          document.getElementById('mf_price').value = o.data.price || '';
+          document.getElementById('mf_image_url').value = o.data.image_url || o.data.img || '';
+          // If uploader supports setUrl, pre-fill preview
+        }
+      });
+    }
+  } else if (type === 'gallery') {
+    t.textContent = (id ? 'Edit' : 'Add') + ' Gallery Photo';
+    b.innerHTML = `
+      <div class="adm-field"><label>Caption</label><input class="adm-input" id="mf_caption" value=""/></div>
+      <div class="adm-field"><label>Alt Text</label><input class="adm-input" id="mf_alt" value=""/></div>
+      <div class="adm-field">
+        <label>Photo</label>
+        <div id="galleryImageUploader"></div>
+        <input type="hidden" id="mf_image_url" value=""/>
+      </div>
+    `;
+    if (typeof createFileUploader === 'function') {
+      const container = document.getElementById('galleryImageUploader');
+      const uploader = createFileUploader({
+        onUpload: (url) => { document.getElementById('mf_image_url').value = url; },
+        previewId: 'galleryImagePreview'
+      });
+      container.appendChild(uploader.container);
+    }
+    if (id) {
+      HorizonAPI.adminGetContent('gallery').then(items => {
+        const g = items.find(x => x.uuid === id);
+        if (g) {
+          document.getElementById('mf_caption').value = g.data.caption || '';
+          document.getElementById('mf_alt').value = g.data.alt || '';
+          document.getElementById('mf_image_url').value = g.data.image_url || g.data.src || '';
+        }
+      });
+    }
+  } else if (type === 'video') {
+    t.textContent = (id ? 'Edit' : 'Add') + ' Video';
+    b.innerHTML = `
+      <div class="adm-field"><label>Label / Title</label><input class="adm-input" id="mf_label" value=""/></div>
+      <div class="adm-field"><label>Embed URL (Facebook/YouTube)</label><input class="adm-input" id="mf_embed_url" value=""/></div>
+      <div class="adm-field">
+        <label>Thumbnail</label>
+        <div id="videoThumbUploader"></div>
+        <input type="hidden" id="mf_thumb" value=""/>
+      </div>
+    `;
+    if (typeof createFileUploader === 'function') {
+      const container = document.getElementById('videoThumbUploader');
+      const uploader = createFileUploader({
+        onUpload: (url) => { document.getElementById('mf_thumb').value = url; },
+        previewId: 'videoThumbPreview'
+      });
+      container.appendChild(uploader.container);
+    }
+    if (id) {
+      HorizonAPI.adminGetContent('video').then(vids => {
+        const v = vids.find(x => x.uuid === id);
+        if (v) {
+          document.getElementById('mf_label').value = v.data.label || v.data.title || '';
+          document.getElementById('mf_embed_url').value = v.data.embed_url || v.data.embedUrl || '';
+          document.getElementById('mf_thumb').value = v.data.thumbnail_url || v.data.thumb || '';
+        }
+      });
     }
   }
-
+}
   function closeModal() { document.getElementById('contentModal')?.classList.remove('show'); }
 
   async function saveModal() {
