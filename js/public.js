@@ -5,14 +5,18 @@
   let lang = localStorage.getItem('aes_lang') || 'en';
   window.lang = lang;
 
-  // 辅助函数
+  // Helper functions
+  function esc(s) {
     return s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : '';
   }
+  function san(s) {
     if (typeof s !== 'string') return '';
     return s.replace(/<[^>]*>/g,'').trim().slice(0,500);
   }
+  function validPhone(p) {
     return /^(\+213|00213|0)[5-9][\d\s\-]{7,14}$/.test(p.replace(/\s/g,''));
   }
+  function showToast(msg, type = '') {
     const el = document.getElementById('toast');
     if (!el) return;
     el.textContent = msg;

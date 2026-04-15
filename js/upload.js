@@ -4,7 +4,7 @@ async function uploadFile(file, type = 'image') {
   formData.append('file', file);
   formData.append('type', type);
 
-  const res = await fetch(`${window.HorizonAPI.baseUrl || 'http://localhost:3000'}/api/v1/upload`, {
+  const res = await fetch('http://localhost:3000/api/v1/upload', {
     method: 'POST',
     credentials: 'include',
     body: formData
