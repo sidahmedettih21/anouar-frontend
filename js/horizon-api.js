@@ -1,16 +1,16 @@
 (function () {
   'use strict';
 
-  const API_BASE = window.location.hostname === 'localhost' 
-    ? 'http://localhost:3000' 
-    : 'https://api.horizon.dz';   // ← change when you deploy
+  const API_BASE = window.location.hostname === 'localhost'
+    ? 'http://localhost:3000'
+    : 'https://api.horizon.com';
 
-  const AGENCY_ID = 1; // Anouar El Sabah demo agency
+  const AGENCY_ID = 1;
 
   async function apiCall(endpoint, options = {}) {
     const url = `${API_BASE}${endpoint}`;
     const headers = { 'Content-Type': 'application/json', ...options.headers };
-    
+
     const res = await fetch(url, {
       credentials: 'include',
       headers,
@@ -26,16 +26,14 @@
 
   window.HorizonAPI = {
     // ─────────────────────────────────────────────────────────────
-    // EXISTING METHODS (kept from your original file)
+    // PUBLIC CONTENT
     // ─────────────────────────────────────────────────────────────
     getContent: (type) => apiCall(`/api/content/${AGENCY_ID}/${type}`),
+
+    // ─────────────────────────────────────────────────────────────
+    // BOOKINGS
+    // ─────────────────────────────────────────────────────────────
     submitBooking: (data) => apiCall('/api/v1/bookings', { method: 'POST', body: JSON.stringify(data) }),
-
-    // ─────────────────────────────────────────────────────────────
-    // NEW METHODS REQUIRED BY CLAUDE’S ADMIN.JS v2
-    // ─────────────────────────────────────────────────────────────
-    getDashboardStats: () => apiCall('/api/v1/dashboard/stats'),
-
     getBookings: (params = {}) => {
       const query = new URLSearchParams(params).toString();
       return apiCall(`/api/v1/bookings${query ? '?' + query : ''}`);
@@ -44,6 +42,9 @@
     updateBooking: (uuid, data) => apiCall(`/api/v1/bookings/${uuid}`, { method: 'PUT', body: JSON.stringify(data) }),
     deleteBooking: (uuid) => apiCall(`/api/v1/bookings/${uuid}`, { method: 'DELETE' }),
 
+    // ─────────────────────────────────────────────────────────────
+    // CLIENTS
+    // ─────────────────────────────────────────────────────────────
     getClients: (params = {}) => {
       const query = new URLSearchParams(params).toString();
       return apiCall(`/api/v1/clients${query ? '?' + query : ''}`);
@@ -53,49 +54,81 @@
     updateClient: (uuid, data) => apiCall(`/api/v1/clients/${uuid}`, { method: 'PUT', body: JSON.stringify(data) }),
     deleteClient: (uuid) => apiCall(`/api/v1/clients/${uuid}`, { method: 'DELETE' }),
 
+    // ─────────────────────────────────────────────────────────────
+    // STAFF
+    // ─────────────────────────────────────────────────────────────
     getStaff: () => apiCall('/api/v1/staff'),
     createStaff: (data) => apiCall('/api/v1/staff', { method: 'POST', body: JSON.stringify(data) }),
     updateStaff: (uuid, data) => apiCall(`/api/v1/staff/${uuid}`, { method: 'PUT', body: JSON.stringify(data) }),
     deleteStaff: (uuid) => apiCall(`/api/v1/staff/${uuid}`, { method: 'DELETE' }),
 
+    // ─────────────────────────────────────────────────────────────
+    // LEADS
+    // ─────────────────────────────────────────────────────────────
     getLeads: (params = {}) => {
       const query = new URLSearchParams(params).toString();
       return apiCall(`/api/v1/leads${query ? '?' + query : ''}`);
     },
     convertLead: (id) => apiCall(`/api/v1/leads/${id}/convert`, { method: 'POST' }),
 
+    // ─────────────────────────────────────────────────────────────
+    // DASHBOARD
+    // ─────────────────────────────────────────────────────────────
+    getDashboardStats: () => apiCall('/api/v1/dashboard/stats'),
+
+    // ─────────────────────────────────────────────────────────────
+    // TRANSACTIONS (JOURNAL)
+    // ─────────────────────────────────────────────────────────────
     getTransactions: (params = {}) => {
       const query = new URLSearchParams(params).toString();
       return apiCall(`/api/v1/transactions${query ? '?' + query : ''}`);
     },
     createTransaction: (data) => apiCall('/api/v1/transactions', { method: 'POST', body: JSON.stringify(data) }),
 
+    // ─────────────────────────────────────────────────────────────
+    // ATTENDANCE
+    // ─────────────────────────────────────────────────────────────
     getAttendance: (params = {}) => {
       const query = new URLSearchParams(params).toString();
       return apiCall(`/api/v1/attendance${query ? '?' + query : ''}`);
     },
 
+    // ─────────────────────────────────────────────────────────────
+    // REMINDERS
+    // ─────────────────────────────────────────────────────────────
     getReminders: () => apiCall('/api/v1/reminders'),
+    createReminder: (data) => apiCall('/api/v1/reminders', { method: 'POST', body: JSON.stringify(data) }),
     markReminderDone: (id) => apiCall(`/api/v1/reminders/${id}/done`, { method: 'PUT' }),
 
-    // Upload (used by file picker)
-    upload: (formData) => fetch(`${API_BASE}/api/v1/upload`, {
-      method: 'POST',
-      credentials: 'include',
-      body: formData
-    }).then(r => r.json()),
+    // ─────────────────────────────────────────────────────────────
+    // AGENCY BRANDING
+    // ─────────────────────────────────────────────────────────────
+    updateAgency: (data) => apiCall('/api/v1/agency', { method: 'PUT', body: JSON.stringify(data) }),
 
-    // Content management
+    // ─────────────────────────────────────────────────────────────
+    // CONTENT MANAGEMENT (OFFERS/GALLERY/VIDEOS)
+    // ─────────────────────────────────────────────────────────────
     adminGetContent: (type) => apiCall(`/api/content/admin/${type}`),
     adminCreateContent: (type, data) => apiCall(`/api/content/admin/${type}`, { method: 'POST', body: JSON.stringify(data) }),
     adminUpdateContent: (type, uuid, data) => apiCall(`/api/content/admin/${type}/${uuid}`, { method: 'PUT', body: JSON.stringify(data) }),
     adminDeleteContent: (type, uuid) => apiCall(`/api/content/admin/${type}/${uuid}`, { method: 'DELETE' }),
 
-    // Auth (already existed, kept)
+    // ─────────────────────────────────────────────────────────────
+    // AUTH
+    // ─────────────────────────────────────────────────────────────
     login: (email, password) => apiCall('/api/v1/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
     logout: () => apiCall('/api/v1/auth/logout', { method: 'POST' }),
-    getMe: () => apiCall('/api/v1/auth/me')
+    getMe: () => apiCall('/api/v1/auth/me'),
+
+    // ─────────────────────────────────────────────────────────────
+    // UPLOAD
+    // ─────────────────────────────────────────────────────────────
+    upload: (formData) => fetch(`${API_BASE}/api/v1/upload`, {
+      method: 'POST',
+      credentials: 'include',
+      body: formData
+    }).then(r => r.json())
   };
 
-  console.log('%c✅ HorizonAPI v2 loaded (with all admin.js v2 methods)', 'color:#00ff00;font-weight:bold');
+  console.log('%c✅ HorizonAPI v2 loaded', 'color:#00ff00;font-weight:bold');
 })();
