@@ -1,4 +1,4 @@
-/* ========== CSS COMPLETO (mesmo estilo da versão “boa” – inalterado) ========== */
+/* ========== CSS COMPLETO ========== */
 :root{--gold:#C9A227;--gold-l:#E4C15A;--gold-d:#9A7A1A;--gold-pale:#FDF6E3;--gold-dim:rgba(201,162,39,.12);--sky:#38BDF8;--sky-l:#7DD3FC;--sky-d:#0284C7;--sky-dim:rgba(56,189,248,.1);--dark:#0F172A;--dark-2:#1E293B;--white:#FFFFFF;--off-white:#FAFBFF;--gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-400:#94A3B8;--gray-600:#475569;--text:#1E293B;--text-2:#475569;--border:rgba(201,162,39,.2);--border-2:#E2E8F0;--shadow-sm:0 2px 12px rgba(0,0,0,.06);--shadow-md:0 8px 30px rgba(0,0,0,.09);--shadow-lg:0 20px 50px rgba(0,0,0,.13);--shadow-gd:0 8px 30px rgba(201,162,39,.2);--r-sm:12px;--r-md:18px;--r-lg:24px;--r-xl:32px;--ease:cubic-bezier(.25,.8,.25,1);--t:.3s;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -212,7 +212,7 @@ body.ar .footer-name{font-family:'Cairo',sans-serif;}
 .footer-col ul a:hover{color:var(--gold-l);}
 .footer-bottom{max-width:1200px;margin:0 auto;padding-top:2rem;border-top:1px solid rgba(255,255,255,.06);text-align:center;color:rgba(255,255,255,.3);font-size:.78rem;}
 
-/* ===== ADMIN DASHBOARD — PALANTIR STYLE ===== */
+/* ===== ADMIN DASHBOARD ===== */
 #adminPanel{display:none;position:fixed;inset:0;z-index:3000;background:var(--dark);overflow:hidden;flex-direction:column;}
 #adminPanel.show{display:flex;}
 .adm-topbar{background:#0A111E;border-bottom:1px solid rgba(201,162,39,.15);padding:0 1.5rem;height:56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;gap:1rem;}
@@ -254,6 +254,7 @@ body.ar .footer-name{font-family:'Cairo',sans-serif;}
 .adm-btn.danger{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#f87171;}
 .adm-btn.danger:hover{background:rgba(239,68,68,.2);}
 .adm-btn.success{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:#4ade80;}
+.adm-btn.success:hover{background:rgba(34,197,94,.2);}
 .adm-tbl-wrap{overflow-x:auto;}
 .adm-tbl{width:100%;border-collapse:collapse;font-size:.8rem;}
 .adm-tbl th{background:rgba(201,162,39,.05);color:var(--gold-l);font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:.7rem 1rem;text-align:left;border-bottom:1px solid rgba(201,162,39,.08);white-space:nowrap;}
@@ -278,7 +279,7 @@ body.ar .adm-tbl th{text-align:right;}
 .adm-content-card-body{padding:.75rem;}
 .adm-content-card-title{font-size:.82rem;font-weight:600;color:white;margin-bottom:.25rem;}
 .adm-content-card-sub{font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:.6rem;}
-.adm-content-card-actions{display:flex;gap:.4rem;}
+.adm-content-card-actions{display:flex;gap:.4rem;flex-wrap:wrap;}
 .adm-add-card{background:rgba(201,162,39,.04);border:1px dashed rgba(201,162,39,.2);border-radius:10px;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;cursor:pointer;transition:all .2s;}
 .adm-add-card:hover{background:rgba(201,162,39,.08);border-color:rgba(201,162,39,.4);}
 .adm-add-card i{font-size:1.5rem;color:var(--gold-l);}
@@ -294,9 +295,6 @@ body.ar .adm-tbl th{text-align:right;}
 .adm-input::placeholder{color:rgba(255,255,255,.2);}
 .adm-textarea{min-height:80px;resize:vertical;}
 .adm-modal-btns{display:flex;gap:.6rem;margin-top:1.2rem;justify-content:flex-end;}
-.adm-pagination { margin-top: 1rem; display: flex; justify-content: center; }
-.adm-pagination-btn { background: #1C2A3A; border: 1px solid rgba(201,162,39,.2); color: white; padding: 0.3rem 0.8rem; margin: 0 0.2rem; border-radius: 4px; cursor: pointer; }
-.adm-pagination-btn.active { background: var(--gold); color: black; }
 .admin-login-wrap{display:none;position:fixed;inset:0;z-index:4500;background:rgba(10,17,30,.95);backdrop-filter:blur(10px);align-items:center;justify-content:center;}
 .admin-login-wrap.show{display:flex;}
 .login-card{background:linear-gradient(145deg,rgba(28,42,58,.95),rgba(13,24,41,.98));border:1px solid rgba(201,162,39,.2);border-radius:var(--r-xl);padding:2.5rem 2rem;width:100%;max-width:340px;text-align:center;box-shadow:0 40px 80px rgba(0,0,0,.5);}
@@ -304,8 +302,6 @@ body.ar .adm-tbl th{text-align:right;}
 .login-card h2{font-family:'Playfair Display',serif;color:var(--gold-l);margin-bottom:.3rem;font-size:1.3rem;}
 .login-card p{color:rgba(255,255,255,.35);font-size:.82rem;margin-bottom:1.8rem;}
 .login-err{color:#f87171;font-size:.78rem;margin-top:.5rem;display:none;}
-.login-hint{color:rgba(255,255,255,.2);font-size:.68rem;margin-top:1rem;}
-.login-hint code{color:var(--gold-l);}
 .wa-float{position:fixed;bottom:1.8rem;right:1.8rem;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;color:white;font-size:1.4rem;box-shadow:0 6px 25px rgba(37,211,102,.45);z-index:990;animation:pulse-gold 3s infinite;transition:transform .2s;}
 body.ar .wa-float{right:auto;left:1.8rem;}
 .wa-float:hover{transform:scale(1.1);}
@@ -313,100 +309,13 @@ body.ar .wa-float{right:auto;left:1.8rem;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .toast.ok{border-color:rgba(34,197,94,.4);color:#4ade80;}
 .toast.err{border-color:rgba(239,68,68,.4);color:#f87171;}
+.family-row{background:rgba(201,162,39,.08)!important;border-left:3px solid var(--gold);}
+/* ===== EMPTY STATE ===== */
+.adm-empty-state{text-align:center;padding:3rem 2rem;color:rgba(255,255,255,.4);font-size:.9rem;background:rgba(28,42,58,.3);border-radius:12px;margin:1rem 0;}
+.adm-empty-state i{font-size:3rem;margin-bottom:1rem;opacity:.4;display:block;}
+.adm-empty-state p{margin-bottom:1.2rem;font-size:1rem;color:rgba(255,255,255,.6);}
+/* ===== RESPONSIVE ===== */
 @media(max-width:1100px){.services-grid{grid-template-columns:repeat(3,1fr);}.why-grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}.gallery-grid{grid-template-columns:repeat(2,1fr);}.gallery-strip{grid-template-columns:repeat(2,1fr);}.adm-sidebar{width:170px;}}
 @media(max-width:900px){.nav-links-wrap{display:none;}.hamburger{display:flex;}.hero-inner{grid-template-columns:1fr;gap:2.5rem;}.hero-right{max-width:400px;margin:0 auto;}.watch-inner{grid-template-columns:1fr;gap:3rem;}.watch-right{order:-1;}.stats-strip-inner{grid-template-columns:repeat(2,1fr);}.adm-sidebar{display:none;}}
+@media(max-width:768px){.adm-layout{flex-direction:column;}.adm-sidebar{width:100%;border-right:none;border-bottom:1px solid rgba(201,162,39,.1);}.adm-nav-item{padding:.8rem 1rem;}.adm-topbar{flex-wrap:wrap;height:auto;padding:.5rem 1rem;}.adm-topbar-right{margin-left:auto;}.adm-modal{max-width:95%;padding:1rem;}.adm-kpi-grid{grid-template-columns:repeat(2,1fr);}.adm-tbl th,.adm-tbl td{white-space:normal;}}
 @media(max-width:640px){.services-grid{grid-template-columns:repeat(2,1fr);}.form-grid{grid-template-columns:1fr;}.form-grid .full{grid-column:1;}.hero-stats{gap:1.5rem;}.hero-btns{flex-direction:column;}.hero-btns .btn{width:100%;}.booking-header{padding:1.5rem;}.booking-body{padding:1.5rem;}.footer-grid{grid-template-columns:1fr;}.gallery-grid{grid-template-columns:1fr;}.gal-item.wide{grid-column:1;}.gal-item.tall{grid-row:auto;}.gallery-strip{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}.offers-grid{grid-template-columns:1fr;}.adm-kpi-grid{grid-template-columns:repeat(2,1fr);}}
-.family-row { background: rgba(201, 162, 39, 0.08) !important; border-left: 3px solid var(--gold); }
-@media (max-width: 768px) {
-  .adm-layout { flex-direction: column; }
-  .adm-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(201,162,39,.1); }
-  .adm-nav-item { padding: 0.8rem 1rem; }
-  .adm-topbar { flex-wrap: wrap; height: auto; padding: 0.5rem 1rem; }
-  .adm-topbar-right { margin-left: auto; }
-  .adm-modal { max-width: 95%; padding: 1rem; }
-  .adm-kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  .adm-tbl th, .adm-tbl td { white-space: normal; }
-}
-/* Empty state styling */
-.adm-empty-state {
-  text-align: center;
-  padding: 3rem 2rem;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.9rem;
-  background: rgba(28, 42, 58, 0.3);
-  border-radius: 12px;
-  margin: 1rem 0;
-}
-.adm-empty-state i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  opacity: 0.4;
-}
-.adm-empty-state p {
-  margin-bottom: 1.2rem;
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-// ========== OFFERS, GALLERY, VIDEOS, SETTINGS (simplified – same pattern as before) ==========
-function renderOffersSection(c) { const offs = LS.get('aes_offers', DEF_OFFERS); c.innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:1rem;"><h2>Manage Offers</h2><button class="adm-btn success" onclick="openModal('offer',null)"><i class="fas fa-plus"></i> Add Offer</button></div><div class="adm-grid">${offs.map(o=>`<div class="adm-content-card"><img src="${o.img}" alt="${o.title}"/><div class="adm-content-card-body"><div class="adm-content-card-title">${o.title}</div><div class="adm-content-card-sub">${Number(o.price).toLocaleString()} DZD · ${o.active!==false?'Active':'Hidden'}</div><div class="adm-content-card-actions"><button class="adm-btn" onclick="openModal('offer',${o.id})">Edit</button><button class="adm-btn" onclick="toggleActive('offer',${o.id})">${o.active!==false?'Hide':'Show'}</button><button class="adm-btn danger" onclick="deleteItem('offer',${o.id})">Delete</button></div></div></div>`).join('')}<div class="adm-add-card" onclick="openModal('offer',null)"><i class="fas fa-plus"></i><span>Add Offer</span></div></div>`; }
-function renderGallerySection(c) { const gl = LS.get('aes_gallery', DEF_GALLERY); c.innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:1rem;"><h2>Manage Gallery</h2><button class="adm-btn success" onclick="openModal('gallery',null)"><i class="fas fa-plus"></i> Add Photo</button></div><div class="adm-grid">${gl.map(g=>`<div class="adm-content-card"><img src="${g.src}" alt="${g.alt}"/><div class="adm-content-card-body"><div class="adm-content-card-title">${g.caption}</div><div class="adm-content-card-sub">${g.active!==false?'Visible':'Hidden'}</div><div class="adm-content-card-actions"><button class="adm-btn" onclick="openModal('gallery',${g.id})">Edit</button><button class="adm-btn" onclick="toggleActive('gallery',${g.id})">${g.active!==false?'Hide':'Show'}</button><button class="adm-btn danger" onclick="deleteItem('gallery',${g.id})">Delete</button></div></div></div>`).join('')}<div class="adm-add-card" onclick="openModal('gallery',null)"><i class="fas fa-image"></i><span>Add Photo</span></div></div>`; }
-function renderVideosSection(c) { const vids = LS.get('aes_videos', DEF_VIDEOS); c.innerHTML = `<div style="display:flex;justify-content:space-between;margin-bottom:1rem;"><h2>Manage Videos</h2><button class="adm-btn success" onclick="openModal('video',null)"><i class="fas fa-plus"></i> Add Video</button></div><div class="adm-grid">${vids.map((v,i)=>`<div class="adm-content-card"><img src="${v.thumb}" alt=""/><div class="adm-content-card-body"><div class="adm-content-card-title">${v.label}</div><div class="adm-content-card-sub">${v.active!==false?'Active':'Hidden'}</div><div class="adm-content-card-actions"><button class="adm-btn" onclick="openModal('video',${v.id})">Edit</button><button class="adm-btn" onclick="toggleActive('video',${v.id})">${v.active!==false?'Hide':'Show'}</button><button class="adm-btn danger" onclick="deleteItem('video',${v.id})">Delete</button></div></div></div>`).join('')}<div class="adm-add-card" onclick="openModal('video',null)"><i class="fas fa-video"></i><span>Add Video</span></div></div>`; }
-function renderSettingsSection(c) { c.innerHTML = `<div class="adm-card"><div class="adm-card-head"><div class="adm-card-title">Branding</div></div><div style="padding:1rem;"><div class="adm-field"><label>Logo URL</label><input class="adm-input" id="logoUrl" value="${LS.get('aes_logo','https://via.placeholder.com/100x100?text=Logo')}"/></div><div class="adm-field"><label>Favicon URL</label><input class="adm-input" id="faviconUrl" value="${LS.get('aes_favicon','https://via.placeholder.com/32x32?text=EM')}"/></div><button class="adm-btn success" onclick="updateBranding()">Save</button></div></div><div class="adm-card"><div class="adm-card-head"><div class="adm-card-title">Data</div></div><div style="padding:1rem;"><button class="adm-btn" onclick="backupData()">Backup All Data</button><button class="adm-btn" onclick="$('restoreInput').click()">Restore Backup</button><input type="file" id="restoreInput" accept=".json" style="display:none" onchange="restoreData(event)"/></div></div>`; }
-function updateBranding() { const logo = document.getElementById('logoUrl').value; const favicon = document.getElementById('faviconUrl').value; LS.set('aes_logo', logo); LS.set('aes_favicon', favicon); const link = document.querySelector("link[rel*='icon']") || document.createElement('link'); link.rel = 'icon'; link.href = favicon; document.head.appendChild(link); showToast('Branding updated','ok'); }
-function backupData() { const backup = {offers:LS.get('aes_offers',DEF_OFFERS), gallery:LS.get('aes_gallery',DEF_GALLERY), videos:LS.get('aes_videos',DEF_VIDEOS), clients, payments, bookings}; const a = document.createElement('a'); a.href = 'data:application/json,'+encodeURIComponent(JSON.stringify(backup)); a.download = 'anouar-backup-'+Date.now()+'.json'; a.click(); showToast('Backup downloaded','ok'); }
-function restoreData(ev) { const file = ev.target.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = e => { try { const d = JSON.parse(e.target.result); if(d.offers) LS.set('aes_offers',d.offers); if(d.gallery) LS.set('aes_gallery',d.gallery); if(d.videos) LS.set('aes_videos',d.videos); if(d.clients) { clients = d.clients; LS.set('aes_clients', clients); } if(d.payments) { payments = d.payments; LS.set('aes_payments', payments); } if(d.bookings) { bookings = d.bookings; LS.set('aes_pending', bookings); } renderOffers(); renderGallery(); updateVideoPosters(); loadSection(adminSection); showToast('Data restored','ok'); } catch(e) { showToast('Invalid backup file','err'); } }; reader.readAsText(file); ev.target.value = ''; }
-
-// ========== MODAL HELPERS ==========
-function openModal(type, id) { modalMode = type; modalEditId = id; const m = $('contentModal'), t = $('modalTitle'), b = $('modalBody'); m.classList.add('show'); if(type==='offer') { const offs = LS.get('aes_offers',DEF_OFFERS); const o = id ? offs.find(x=>x.id===id) : null; t.textContent = (id?'Edit':'Add')+' Offer'; b.innerHTML = `<div class="adm-field"><label>Title (EN)</label><input class="adm-input" id="mf_title" value="${esc(o?.title||'')}"/></div><div class="adm-field"><label>Titre (FR)</label><input class="adm-input" id="mf_titleFr" value="${esc(o?.titleFr||'')}"/></div><div class="adm-field"><label>العنوان (AR)</label><input class="adm-input" id="mf_titleAr" value="${esc(o?.titleAr||'')}"/></div><div class="adm-field"><label>Description (EN)</label><textarea class="adm-input adm-textarea" id="mf_desc">${esc(o?.desc||'')}</textarea></div><div class="adm-field"><label>Description (FR)</label><textarea class="adm-input adm-textarea" id="mf_descFr">${esc(o?.descFr||'')}</textarea></div><div class="adm-field"><label>الوصف (AR)</label><textarea class="adm-input adm-textarea" id="mf_descAr">${esc(o?.descAr||'')}</textarea></div><div class="adm-field"><label>Price (DZD)</label><input class="adm-input" id="mf_price" type="number" value="${esc(String(o?.price||''))}"/></div><div class="adm-field"><label>Image URL</label><input class="adm-input" id="mf_img" value="${esc(o?.img||'')}"/></div>`; }
-  else if(type==='gallery') { const gl = LS.get('aes_gallery',DEF_GALLERY); const g = id ? gl.find(x=>x.id===id) : null; t.textContent = (id?'Edit':'Add')+' Gallery Photo'; b.innerHTML = `<div class="adm-field"><label>Image URL</label><input class="adm-input" id="mf_src" value="${esc(g?.src||'')}"/></div><div class="adm-field"><label>Caption</label><input class="adm-input" id="mf_caption" value="${esc(g?.caption||'')}"/></div><div class="adm-field"><label>Alt text</label><input class="adm-input" id="mf_alt" value="${esc(g?.alt||'')}"/></div>`; }
-  else if(type==='video') { const vids = LS.get('aes_videos',DEF_VIDEOS); const v = id ? vids.find(x=>x.id===id) : null; t.textContent = (id?'Edit':'Add')+' Video'; b.innerHTML = `<div class="adm-field"><label>Label</label><input class="adm-input" id="mf_label" value="${esc(v?.label||'')}"/></div><div class="adm-field"><label>Thumbnail URL</label><input class="adm-input" id="mf_thumb" value="${esc(v?.thumb||'')}"/></div><div class="adm-field"><label>Embed URL (with &t=1)</label><input class="adm-input" id="mf_embed" value="${esc(v?.embedUrl||'')}"/></div>`; } }
-function closeModal() { $('contentModal').classList.remove('show'); }
-function saveModal() {
-  const type = modalMode, id = modalEditId;
-  if(type==='offer') { const offs = LS.get('aes_offers',DEF_OFFERS); const newO = {id:id||Date.now(), title: sanitizeInput('mf_title'), titleFr: sanitizeInput('mf_titleFr'), titleAr: sanitizeInput('mf_titleAr'), desc: sanitizeInput('mf_desc'), descFr: sanitizeInput('mf_descFr'), descAr: sanitizeInput('mf_descAr'), price: $('mf_price').value||'0', img: sanitizeInput('mf_img'), active: true }; if(id){ const i = offs.findIndex(x=>x.id===id); if(i>=0){ newO.active = offs[i].active; offs[i] = newO; } } else offs.push(newO); LS.set('aes_offers',offs); renderOffers(); renderOffersSection($('adminContent')); }
-  else if(type==='gallery') { const gl = LS.get('aes_gallery',DEF_GALLERY); const newG = {id:id||Date.now(), src: sanitizeInput('mf_src'), caption: sanitizeInput('mf_caption'), alt: sanitizeInput('mf_alt'), active: true }; if(id){ const i = gl.findIndex(x=>x.id===id); if(i>=0){ newG.active = gl[i].active; gl[i] = newG; } } else gl.push(newG); LS.set('aes_gallery',gl); renderGallery(); renderGallerySection($('adminContent')); }
-  else if(type==='video') { const vids = LS.get('aes_videos',DEF_VIDEOS); let url = sanitizeInput('mf_embed'); if(url && !url.includes('&t=1') && !url.includes('?t=1')) url += '&t=1'; const newV = {id:id||Date.now(), label: sanitizeInput('mf_label'), thumb: sanitizeInput('mf_thumb'), embedUrl: url, active: true }; if(id){ const i = vids.findIndex(x=>x.id===id); if(i>=0){ newV.active = vids[i].active; vids[i] = newV; } } else vids.push(newV); LS.set('aes_videos',vids); updateVideoPosters(); renderVideosSection($('adminContent')); }
-  closeModal(); showToast('Saved!','ok');
-}
-function sanitizeInput(id) { return san($(id)?.value || ''); }
-function toggleActive(type, id) { const keys = {offer:'aes_offers', gallery:'aes_gallery', video:'aes_videos'}; const defs = {offer:DEF_OFFERS, gallery:DEF_GALLERY, video:DEF_VIDEOS}; const arr = LS.get(keys[type], defs[type]); const i = arr.findIndex(x=>x.id===id); if(i<0) return; arr[i].active = !arr[i].active; LS.set(keys[type], arr); if(type==='offer') renderOffers(); if(type==='gallery') renderGallery(); if(type==='video') updateVideoPosters(); loadSection(adminSection); }
-function deleteItem(type, id) { if(!confirm('Delete?')) return; const keys = {offer:'aes_offers', gallery:'aes_gallery', video:'aes_videos'}; const defs = {offer:DEF_OFFERS, gallery:DEF_GALLERY, video:DEF_VIDEOS}; const arr = LS.get(keys[type], defs[type]).filter(x=>x.id!==id); LS.set(keys[type], arr); if(type==='offer') renderOffers(); if(type==='gallery') renderGallery(); if(type==='video') updateVideoPosters(); loadSection(adminSection); showToast('Deleted',''); }
-
-// ========== NOTIFICATIONS ==========
-function addNotification(title, body) { notifications.unshift({id:Date.now(), title, body, read:false, timestamp:new Date()}); while(notifications.length>20) notifications.pop(); LS.set('aes_notifications', notifications); updateNotificationBadge(); if(Notification.permission === 'granted') new Notification(title, {body}); }
-function updateNotificationBadge() { const unread = notifications.filter(n=>!n.read).length; const badge = document.getElementById('notificationBadge'); if(badge) { badge.textContent = unread; badge.style.display = unread ? 'block' : 'none'; } }
-function toggleNotificationPanel() { const panel = document.getElementById('notificationPanel'); const list = document.getElementById('notificationList'); if(panel.style.display === 'flex') { panel.style.display = 'none'; return; } list.innerHTML = notifications.map(n=>`<div style="padding:8px;border-bottom:1px solid #eee;opacity:${n.read?0.6:1}"><strong>${esc(n.title)}</strong><br><small>${esc(n.body)}</small><br><small style="color:gray">${new Date(n.timestamp).toLocaleString()}</small></div>`).join('') || '<div style="padding:10px;text-align:center;">No notifications</div>'; panel.style.display = 'flex'; }
-if('Notification' in window && Notification.permission !== 'denied') Notification.requestPermission();
-
-// ========== GLOBAL SEARCH ==========
-const globalSearchInput = document.getElementById('globalSearchInput');
-const globalSearchResults = document.getElementById('globalSearchResults');
-globalSearchInput.addEventListener('input', (e) => {
-  const q = e.target.value.toLowerCase().trim();
-  if(!q) { globalSearchResults.style.display = 'none'; return; }
-  const results = [];
-  clients.forEach(c => { if(c.name.toLowerCase().includes(q) || c.phone.includes(q)) results.push({type:'Client', name:c.name, phone:c.phone}); });
-  payments.forEach(p => { const c = clients.find(cl=>cl.id===p.clientId); if(c && (c.name.toLowerCase().includes(q) || p.amount.toString().includes(q))) results.push({type:'Payment', client:c.name, amount:p.amount}); });
-  if(results.length) { globalSearchResults.innerHTML = results.map(r => `<div style="padding:8px;border-bottom:1px solid #eee;">${r.type}: ${r.name||r.client} ${r.amount?' - '+r.amount.toLocaleString()+' DZD':''}</div>`).join(''); globalSearchResults.style.display = 'block'; }
-  else { globalSearchResults.style.display = 'none'; }
-});
-document.addEventListener('click', (e) => { if(!globalSearchInput.contains(e.target) && !globalSearchResults.contains(e.target)) globalSearchResults.style.display = 'none'; });
-
-// ========== EXPORT FUNCTIONS ==========
-async function exportExcel() { const ws = XLSX.utils.json_to_sheet(bookings); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, 'Bookings'); XLSX.writeFile(wb, 'anouar-bookings-'+Date.now()+'.xlsx'); showToast('Excel exported','ok'); }
-async function exportPDF() { if(!bookings.length) { showToast('No data',''); return; } const {jsPDF} = window.jspdf; const doc = new jsPDF({orientation:'landscape'}); doc.setFontSize(16); doc.text('Anouar El Sabah Relizane — Bookings', 14, 20); doc.setFontSize(9); doc.text('Exported: '+new Date().toLocaleString(), 14, 28); doc.autoTable({startY:35, head:[['#','Date','Service','Name','Phone','Status']], body:bookings.map((b,i)=>[i+1,b.ts||'',b.service||'',b.name||'',b.phone||'',b.status||'new']), styles:{fontSize:8}}); doc.save('anouar-bookings-'+Date.now()+'.pdf'); showToast('PDF exported','ok'); }
-async function exportCSV() { if(!bookings.length) { showToast('No data',''); return; } const keys = ['ts','name','phone','service','status']; const lines = [keys.join(','), ...bookings.map(b=>keys.map(k=>'"'+(b[k]||'').replace(/"/g,'""')+'"').join(','))]; const a = document.createElement('a'); a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(lines.join('\n')); a.download = 'anouar-bookings-'+Date.now()+'.csv'; a.click(); showToast('CSV exported','ok'); }
-
-// ========== INIT ==========
-initData().then(() => {
-  setLang(lang);
-  observeAll();
-  updateBookingHeader();
-  updateVideoPosters();
-  $('t-service').addEventListener('change', updateBookingHeader);
-  $('bookingForm').addEventListener('submit', submitForm);
-  if($('t-date')) $('t-date').min=new Date().toISOString().slice(0,10);
-});
-</script>
-</body>
-</html>
